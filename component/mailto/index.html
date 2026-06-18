@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb" dir="ltr">
+<head>
+<script>
+(function() {
+  var search = window.location.search;
+  function normalizeQuery(q) {
+    if (!q) return '';
+    if (q.indexOf('?') === 0) q = q.substring(1);
+    var parts = q.split('&');
+    var params = [];
+    for (var i = 0; i < parts.length; i++) {
+      if (!parts[i]) continue;
+      var p = parts[i].split('=');
+      var key = decodeURIComponent(p[0]);
+      var val = p.length > 1 ? decodeURIComponent(p[1]) : '';
+      params.push([key, val]);
+    }
+    params.sort(function(a, b) {
+      if (a[0] !== b[0]) return a[0] < b[0] ? -1 : 1;
+      return a[1] < b[1] ? -1 : 1;
+    });
+    var encoded = [];
+    for (var i = 0; i < params.length; i++) {
+      encoded.push(encodeURIComponent(params[i][0]) + '=' + encodeURIComponent(params[i][1]));
+    }
+    return '?' + encoded.join('&');
+  }
+  var normSearch = normalizeQuery(search);
+  var manifest = {
+  "?link=38edb1eacaac4429d34ac4344a54f74505879724&tmpl=component": "variants/b6a8ebe975e03c2ce90e44608273d995c6dae798.00000021.html",
+  "?link=3b3637eebd38c32c4b295b9e2cdf4816fd497e39&tmpl=component": "variants/f3e2bcb8bada00d7c2a32138b40327a81172331c.00000022.html",
+  "?link=57baf3393da20a235f65f063399303cd5c7d8079&tmpl=component": "variants/0ef8dfd6c410fdf2b64073a5db9176dca1cfcf2e.00000023.html",
+  "?link=604658b40ee6af2c5b98f89c9eef977a20d50d72&tmpl=component": "variants/6eeb001cca22499442ec1573cda95d94205f6e97.00000024.html",
+  "?link=7d5801e7afbb7cc631695e19b27f9ac6edea93e0&tmpl=component": "variants/eabd98686ace9dc544b6af24b9608d5f1c516959.00000025.html",
+  "?link=95109d146cc0c69e218fe075903a5a4b08d03de5&tmpl=component": "variants/03170f787e35a2cbd4e8eeb77dead8952fdaf803.00000026.html",
+  "?link=aHR0cDovL3d3dy53ZXN0d2FyZHNjaG9vbC5jby51ay93ZXN0d2FyZC5odG1s&tmpl=component": "variants/a29b25858a25eb5446633c6b8c2f5708eb19a022.00000027.html",
+  "?link=aHR0cDovL3d3dy53ZXN0d2FyZHNjaG9vbC5jby51ay9hZG1pc3Npb25zL2FkbWlzc2lvbnMtcHJvY2VkdXJlLmh0bWw%3D&tmpl=component": "variants/72f771d4d823d40b76af2594ff3fc390dd9fba1a.00000028.html",
+  "?link=aHR0cDovL3d3dy53ZXN0d2FyZHNjaG9vbC5jby51ay9hZG1pc3Npb25zL2ZlZXMuaHRtbA%3D%3D&tmpl=component": "variants/296fd307fc7b168703ae659b47594c5a13da2ba2.00000029.html",
+  "?link=df0c55751a98966fc0c4920b69761520a183dcda&tmpl=component": "variants/6ce974309de909fd62cd0e8c44f7ee6fbc55da39.00000030.html",
+  "?link=e8ac6a6c880f1d95003b01d59205296c5b969055&tmpl=component": "variants/e87d450065afac6e6ee76a8e0f2ac463d5af6229.00000031.html"
+};
+  var variant = manifest[normSearch];
+  if (variant) {
+    document.documentElement.style.display = 'none';
+    if (variant.toLowerCase().endsWith('.pdf')) {
+      window.location.href = variant;
+      return;
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', variant, false);
+    try {
+      xhr.send();
+      if (xhr.status === 200) {
+        document.documentElement.style.display = '';
+        document.open();
+        document.write(xhr.responseText);
+        document.close();
+      } else {
+        document.documentElement.style.display = '';
+      }
+    } catch (e) {
+      document.documentElement.style.display = '';
+    }
+  }
+})();
+</script>
+	  <base href="../../component/mailto/index.html" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  
+  <meta name="keywords" content="Westward School, Westward, Walton-on-Thames, Walton, Surrey, Elmbridge, School, Independant School, Private School, Hersham Road" />
+  <meta name="description" content="Westward is an independent co-educational school for children from nursery age to eleven-plus. Westward enjoys a reputation for traditional standards and high academic achievements which goes hand in hand with development of caring personalities and individuality." />
+  
+  <title>Westward School</title>
+
+	<link rel="stylesheet" href="../../templates/system/css/general.css" type="text/css" />
+	<link rel="stylesheet" href="../../templates/a4joomla-social-free/css/template.css" type="text/css" />
+</head>
+<body class="contentpane">
+	
+	<script language="javascript" type="text/javascript">
+<!--
+	function submitbutton(pressbutton) {
+	    var form = document.mailtoForm;
+
+		// do field validation
+		if (form.mailto.value == "" || form.from.value == "") {
+			alert( 'Please provide a valid e-mail address.' );
+			return false;
+		}
+		form.submit();
+	}
+-->
+</script>
+
+<form action="https://westwardschool.co.uk/index.php" name="mailtoForm" method="post">
+
+<div style="padding: 10px;">
+	<div style="text-align:right">
+		<a href="javascript: void window.close()">
+			Close Window <img src="../../components/com_mailto/assets/close-x.png" border="0" alt="" title="" /></a>
+	</div>
+
+	<div class="componentheading">
+		E-mail this link to a friend.	</div>
+
+	<p>
+		E-mail to:
+		<br />
+		<input type="text" name="mailto" class="inputbox" size="25" value=""/>
+	</p>
+
+	<p>
+		Sender:
+		<br />
+		<input type="text" name="sender" class="inputbox" value="" size="25" />
+	</p>
+
+	<p>
+		Your E-mail:
+		<br />
+		<input type="text" name="from" class="inputbox" value="" size="25" />
+	</p>
+
+	<p>
+		Subject:
+		<br />
+		<input type="text" name="subject" class="inputbox" value="" size="25" />
+	</p>
+
+	<p>
+		<button class="button" onclick="return submitbutton('send');">
+			Send		</button>
+		<button class="button" onclick="window.close();return false;">
+			Cancel		</button>
+	</p>
+</div>
+
+	<input type="hidden" name="layout" value="default" />
+	<input type="hidden" name="option" value="com_mailto" />
+	<input type="hidden" name="task" value="send" />
+	<input type="hidden" name="tmpl" value="component" />
+	<input type="hidden" name="link" value="38edb1eacaac4429d34ac4344a54f74505879724" />
+	<input type="hidden" name="95a15deeef373f0e13dbdb6a54fe2834" value="1" /></form>
+
+</body>
+</html>

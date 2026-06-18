@@ -1,0 +1,1628 @@
+<!-- from CSV -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function() {
+  var search = window.location.search;
+  function normalizeQuery(q) {
+    if (!q) return '';
+    if (q.indexOf('?') === 0) q = q.substring(1);
+    var parts = q.split('&');
+    var params = [];
+    for (var i = 0; i < parts.length; i++) {
+      if (!parts[i]) continue;
+      var p = parts[i].split('=');
+      var key = decodeURIComponent(p[0]);
+      var val = p.length > 1 ? decodeURIComponent(p[1]) : '';
+      params.push([key, val]);
+    }
+    params.sort(function(a, b) {
+      if (a[0] !== b[0]) return a[0] < b[0] ? -1 : 1;
+      return a[1] < b[1] ? -1 : 1;
+    });
+    var encoded = [];
+    for (var i = 0; i < params.length; i++) {
+      encoded.push(encodeURIComponent(params[i][0]) + '=' + encodeURIComponent(params[i][1]));
+    }
+    return '?' + encoded.join('&');
+  }
+  var normSearch = normalizeQuery(search);
+  var manifest = {
+  "": "variants/de094e638a5abea3f8a63f7bbc1a590acb7d9118.00000672.html",
+  "?skipHAP=y": "variants/f41fa3f20ad6701892625d65706e208bc8964968.00000673.html",
+  "?SSID=14842&password=": "variants/6af74bd292351c85dd77e172106902cd593eb9a6.00000674.html",
+  "?SSID=14848&password=": "variants/42d39bd865a0877af1ecf91802da2eb697ddd74e.00000675.html",
+  "?SSID=15236&password=": "variants/4470c8500f7a3bd60d12b3b52ba140df5044e45b.00000676.html",
+  "?SSID=15237&password=": "variants/49d7d371cfcb162484b358402958ab020b712154.00000677.html",
+  "?SSID=15241&password=": "variants/5676784dbe141b192091e007ba3401f5bee6e616.00000678.html",
+  "?SSID=15242&password=": "variants/a956c59c76a8fc96ab7845c5ca4f35a6a072f993.00000679.html",
+  "?SSID=15243&password=": "variants/63d4846e6fca9ba32a02fc8907624d964577c8f8.00000680.html",
+  "?SSID=15249&password=": "variants/d4a7c411576c1d72affb898cd310d7bf90c19a2a.00000681.html",
+  "?SSID=15252&password=": "variants/ff9fa5f3b879a94705ae551abf21ecf267853be1.00000682.html",
+  "?SSID=15253&password=": "variants/6b342a1822797352a2467dc5ff5aa171d3b4295b.00000683.html",
+  "?SSID=15254&password=": "variants/08fe5d2ca74143841543d3be02e312c754af38a5.00000684.html",
+  "?SSID=15258&password=": "variants/fc9cd2036b6231b6aa96a8b495dd6e8744b08a97.00000685.html",
+  "?SSID=15259&password=": "variants/0265d10e85a70b344285f6b719b0a78182809394.00000686.html",
+  "?SSID=15268&password=": "variants/949707e31773a7eed8d762cf1c29ab7d6db72769.00000687.html",
+  "?SSID=15269&password=": "variants/b04d15be6a80b606787650ac79ee9530c0228872.00000688.html",
+  "?SSID=15274&password=": "variants/965ac5b32e535e6bd6d55f2c6a326db963633c38.00000689.html",
+  "?SSID=15275&password=": "variants/fd7c468cf1ee68dd2cd4178d005d4ae68a17d24a.00000690.html",
+  "?SSID=15280&password=": "variants/60cccfc0fae4073222619cee8a2d56555178b30f.00000691.html",
+  "?SSID=15304&password=": "variants/b33f89a3fa877d483f2ede4b755e919afaae1a9f.00000692.html",
+  "?SSID=15305&password=": "variants/28b7ff8e7e07ef29033ab2fe9466646e4e051d45.00000693.html",
+  "?SSID=15306&password=": "variants/881b34bf3d70953512f560ab980ae3814ebbff12.00000694.html",
+  "?SSID=15309&password=": "variants/07f77ea2f384a2e11191ce1c0adf3ae734782cdd.00000695.html",
+  "?SSID=15310&password=": "variants/f619315cb65e503711ef10ede1e8f948da26c43e.00000696.html",
+  "?SSID=15314&password=": "variants/e6267a5755c28babfba2b25c0d0957817105d5b5.00000697.html",
+  "?SSID=15315&password=": "variants/d3364744b0503b76bcc05e601f2c702adb407231.00000698.html",
+  "?SSID=15321&password=": "variants/79b6e86a4b0b8e9d5c069f0f361d353e860ea49b.00000699.html",
+  "?SSID=15322&password=": "variants/09c8eb0e606f32fbbdef7f6b9895919777cf0db3.00000700.html",
+  "?SSID=15323&password=": "variants/0d0c794f673d76c578f835817f0cabe6221c68f5.00000701.html",
+  "?SSID=15324&password=": "variants/c04fffd2063d090d9f907555456bdee7df9c122c.00000702.html",
+  "?SSID=15331&password=": "variants/65ea115016d4bb4433d3e14d11ba0bb32759b627.00000703.html",
+  "?SSID=15336&password=": "variants/8d64af68baafe5fa8a3a2c1c3545fcd72a7ee2df.00000704.html",
+  "?SSID=15341&password=": "variants/1d07b7bac6fb0cfec5a182dc88b1cae55ed4c62b.00000705.html",
+  "?SSID=15350&password=": "variants/c5833360b3f8c610da3cee2d9ffe6dfe826f3943.00000706.html",
+  "?SSID=15354&password=": "variants/4b42de819c5062d015f301b82393b2db8e6eea48.00000707.html",
+  "?SSID=15357&password=": "variants/d4d6559d2a0384dd22daa2253161be70daa56d43.00000708.html",
+  "?SSID=15362&password=": "variants/a608ca0d010eca904d81792489aed3bcea8cf622.00000709.html",
+  "?SSID=15363&password=": "variants/bbf3514c44155b174b8afdfd28faa197c746dd86.00000710.html",
+  "?SSID=15364&password=": "variants/052ed86869751e434cfdfa0b9851783edc135d57.00000711.html",
+  "?SSID=15369&password=": "variants/33db8f193d4212be7041d3383fdafcec2a458c44.00000712.html",
+  "?SSID=15391&password=": "variants/ba9881d839699ae134009928957055ce53754d70.00000713.html",
+  "?SSID=15392&password=": "variants/e165c18f1d0a768d3ffa6115b7c874323a25f1c6.00000714.html",
+  "?SSID=15397&password=": "variants/ea1b085b9c199dbfebf1770d82023cafcae4b62f.00000715.html",
+  "?SSID=15402&password=": "variants/b974892540f68dc9e5c604965ed25d44944c4985.00000716.html",
+  "?SSID=15405&password=": "variants/d45826724248668ef2d4b62e3fd91d89667e510b.00000717.html",
+  "?SSID=15406&password=": "variants/7923a88fe9d28cb1ad4be071e485583525941edc.00000718.html",
+  "?SSID=15408&password=": "variants/ec52064e19dcc4af6260f84c39d1cb84e0a2d301.00000719.html",
+  "?SSID=15411&password=": "variants/2719af9b5af07d9c26f4493553553284f1ef5747.00000720.html",
+  "?SSID=15439&password=": "variants/3944058694c0e7646ce4fe67e9940688bdc408fa.00000721.html",
+  "?SSID=15441&password=": "variants/bd7b68fb1b3b19ed386a084b37206b58a24f4002.00000722.html",
+  "?SSID=15442&password=": "variants/9ebace76cbc603aef9636c212cac34bc0aba29d3.00000723.html",
+  "?SSID=15445&password=": "variants/4c41618e4bd242d20bc63e6c97525579baa55064.00000724.html",
+  "?SSID=15452&password=": "variants/8968d9ff8b42be2cee31d52a0503d29db1b66edf.00000725.html",
+  "?SSID=15454&password=": "variants/fd708fdd3ed8103c48705c34980288f0e5f5bf8d.00000726.html",
+  "?SSID=15463&password=": "variants/fbc0528f63191f22734649354b9cf55a4172a4d3.00000727.html",
+  "?SSID=15464&password=": "variants/f4ed99719aec68d3e7fbc5479333b6b6f96a51aa.00000728.html",
+  "?SSID=15474&password=": "variants/1f6718fb0798515413c2be904cce35834fe68f53.00000729.html",
+  "?SSID=15476&password=": "variants/35b08a32a2a6669b46cc34bf966f444437156399.00000730.html",
+  "?SSID=15478&password=": "variants/6ad980c1729ec250d16ea0a48015410abe24522c.00000731.html",
+  "?SSID=15506&password=": "variants/3e264be0b019f39f6fa0d70866a42929b580099b.00000732.html",
+  "?SSID=15507&password=": "variants/8903e3eff0d5533b621d60d40b870a1f7ea0364e.00000733.html",
+  "?SSID=15518&password=": "variants/24ec8b76c6e26c17cc1ecb6df3612315bb27762d.00000734.html",
+  "?SSID=15519&password=": "variants/3df4bb9614d9053302c4330423e9da99c2c9d42c.00000735.html",
+  "?SSID=15526&password=": "variants/a22868092ced83aad85bcf5c7e453764121f1355.00000736.html",
+  "?SSID=15527&password=": "variants/80ab2ab884b8de26fe6706a938d750efb754a295.00000737.html",
+  "?SSID=15538&password=": "variants/0e5350604e0c23b6956e640bb13ea691c0322897.00000738.html",
+  "?SSID=15539&password=": "variants/c6dde868d1b2a9ad2cab8019170180226bcb9652.00000739.html",
+  "?SSID=15540&password=": "variants/627a8cd6835b03bdceb143b634057fd9c8efe12e.00000740.html",
+  "?SSID=15541&password=": "variants/712b197e1a1d981d4543227ccd66f1af578edf1e.00000741.html",
+  "?SSID=15543&password=": "variants/93fb81313aad29e13b209d0d1810fa220d3905ee.00000742.html",
+  "?SSID=15579&password=": "variants/04b61e3ea6ab7e31e0f53aac32f83b7babc6b286.00000743.html",
+  "?SSID=15582&password=": "variants/ffdf4e540a77a6a92a084ee5f2259c122e741f96.00000744.html",
+  "?SSID=15583&password=": "variants/69e1cfef1b2f65d2184eb3fc069ff389b64b1488.00000745.html"
+};
+  var variant = manifest[normSearch];
+  if (variant) {
+    document.documentElement.style.display = 'none';
+    if (variant.toLowerCase().endsWith('.pdf')) {
+      window.location.href = variant;
+      return;
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', variant, false);
+    try {
+      xhr.send();
+      if (xhr.status === 200) {
+        document.documentElement.style.display = '';
+        document.open();
+        document.write(xhr.responseText);
+        document.close();
+      } else {
+        document.documentElement.style.display = '';
+      }
+    } catch (e) {
+      document.documentElement.style.display = '';
+    }
+  }
+})();
+</script>
+	<!--pageID 2137-->
+	
+	<meta charset="UTF-8">
+	<title>Westward School - Galleries</title>
+	
+        <meta name="description" content="Independent Co-Educational School for children aged 4 to 11+
+" />
+        <meta name="keywords" content="Independent Co-Educational School for children aged 4 to 11+
+" />
+        
+        
+                
+        
+	<meta name="rating" content="General"/>
+	<meta name="revisit-after" content="2 days"/>
+		
+            
+<link rel="shortcut icon" href="../../favicon.ico" />
+	<link rel="icon" href="../../favicon.ico" />
+	
+	<link href="../../admin/public/c_boxes_buttons.css" rel="stylesheet" type="text/css" />  
+ <link href="../../admin/public/c_boxes_buttons.css" rel="stylesheet" type="text/css" />  
+ <link href="../../inc/c.css" rel="stylesheet" type="text/css" media="screen" />
+	
+	<!-- MOBILE / RESPONSIVE -->
+	
+	
+	<!-- Import IE8 and IE7 Stylesheets -->
+
+	<!--[if lt IE 9]>
+	  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	  <link href="../../inc/c_IE8.css" rel="stylesheet" type="text/css" media="screen" />
+	<![endif]-->
+	<!--[if lt IE 8]>
+	  <link href="../../inc/c_IE7.css" rel="stylesheet" type="text/css" media="screen" />
+	<![endif]-->
+
+	<!-- Current position in navigation -->
+
+	<style type="text/css">
+		.nav li a#nav1279  					{background-color:#d4304f; color: white;}
+		#SideHeadingPages li a#subID2137		{text-decoration:underline;}
+		#SideHeadingPages li a#childID2137	{text-decoration:underline;}
+		ul li.sidelist_li				{display:none;}
+		ul li.PPID2137			{display:block; }
+		ul.nav li a {font-weight: normal; text-transform: none;}
+	</style>
+
+	<!-- Import jQuery -->
+
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+	<!-- If using using Google Webfonts, link to the external CSS file here -->
+
+
+
+
+</head>
+
+<body class="body_2137"  id="theme3">
+
+
+
+<!-- Wrapper -->
+
+<div id="wrapper">
+
+    <!-- Header -->
+    
+    <header>
+            <div class="wrapper">
+                <!-- Logobar -->
+
+                <div id="logobar">
+                    <h1 class="hidden" title="Go to home page">Westward School</h1><!-- Title -->
+
+                    <h1><a href="../../index.asp"><img id="logo" src="../../i/design/WestwardSchoolLogo.png" /></a></h1>
+                </div><!-- Slider -->
+                
+                <form method="post" action="../../inc/Search/index.html" id="FS">
+                    <label for="search-field" class="hidden">Search text</label>
+                    <input name="S" type="text" id="search-field" accesskey="4" onfocus="resetsearch()" value="Search site">
+                    <label for="search-submit" class="hidden">GO</label>
+                    <input type="image" id="search-submit" src="../../i/design/bg_button_search.png" alt="Search" width="12" height="12">
+                </form>
+                
+            </div> <!-- wrapper -->
+			
+			<section class="nav-content">	
+				<div class="wrapper">
+	
+	                <div id="navholder">
+	                    <nav>
+	                        <ul id="dmenu" class="nav">
+<li><a href="../../index.html" id="nav1275">Home</a>
+</li><li><a href="../../Welcome/index.html" id="nav1325">About Us</a>
+<ul><li><a href="../../Westward/Inspection-Reports/index.html">Inspection Reports</a>
+</li><li><a href="../../Westward/School-Ethos/index.html">School Ethos</a>
+</li><li><a href="../../Westward/Staff/index.html">Staff</a>
+</li><li><a href="../../Welcome/index.html">Welcome</a>
+</li><li><a href="../../Admissions/Virtual-Tour-23032021093644/index.html">Virtual Tour</a>
+</li></ul></li><li><a href="../../Admissions/Admissions-Procedure/index.html" id="nav1278">Admissions</a>
+<ul><li><a href="../../Admissions/Visiting-Mornings/index.html">Visiting The School</a>
+</li><li><a href="../../CORONAVIRUS-Online-learning-feedback-June-2020/index.html">Testimonials</a>
+</li><li><a href="../../Parents/Entrance-Exam-Results-23032021132937/index.html">Entrance Exam Results</a>
+</li><li><a href="../../Admissions/Registration/index.html">Registration</a>
+</li><li><a href="../../Admissions/Terms-Conditions/index.html">Terms & Conditions</a>
+</li><li><a href="../../Admissions/Fees/index.html">Fees</a>
+</li><li><a href="../../Admissions/Prospectus-Pack/index.html">Virtual Tour</a>
+</li><li><a href="../../Admissions/Admissions-Procedure/index.html">Admissions Procedure</a>
+</li></ul></li><li><a href="../../Parents/index.html" id="nav1280">Parents</a>
+<ul><li><a href="../../Policies/index.html">Policies & Procedures</a>
+<ul><li><a href="../../Parents/Anti-Bullying-Policy/index.html">Anti-Bullying Policy</a></li>
+<li><a href="../../Parents/Arrival-Dismissal-and-Collection-of-Children-Polic/index.html">Arrival, Dismissal and Collection of Children Policy</a></li>
+<li><a href="../../Parents/Attendance-Policy/index.html">Attendance Policy</a></li>
+<li><a href="../../Parents/Behaviour-Policy/index.html">Behaviour Policy</a></li>
+<li><a href="../../Parents/Safeguarding-and-Child-Protection-P-02082017141241/index.html">Child Protection and Safeguarding Policy</a></li>
+<li><a href="../../Parents/Complaints-Procedure/index.html">Complaints Procedure</a></li>
+<li><a href="../../Parents/Disability-Access-Policy/index.html">Disability Access Policy</a></li>
+<li><a href="../../Parents/Equal-Opportunities-Policy/index.html">Equal Opportunities Policy</a></li>
+<li><a href="../../Parents/Exclusions-Policy/index.html">Exclusions Policy</a></li>
+<li><a href="../../Policies/Fire-Safety-Policy-01082017164000/index.html">Fire Safety Policy</a></li>
+<li><a href="../../EarlyYears/First-Aid-Policy/index.asp">First Aid Policy</a></li>
+<li><a href="../../Parents/Health-and-Safety-Policy/index.html">Health and Safety Policy</a></li>
+<li><a href="../../Parents/Medical-Conditions-Policy/index.html">Medical Conditions Policy</a></li>
+<li><a href="../../Mental-Health-and-Well-Being-Policy/index.html">Mental Health and Wellbeing Policy</a></li>
+<li><a href="../../Parents/Missing-Child-Policy/index.html">Missing Child Policy</a></li>
+<li><a href="../../Online-Safety-Policy/index.html">Online Safety Policy</a></li>
+<li><a href="../../Policies/Parental-Behaviour-Policy/index.html">Parental Behaviour Policy</a></li>
+<li><a href="../../Parents/Recruitment-Policy/index.html">Recruitment Policy</a></li>
+<li><a href="../../Remote-Learning-Policy/index.html">Remote Learning Policy</a></li>
+<li><a href="../../Parents/Risk-Assessment-Policy-for-Pupil-Welfare/index.html">Risk Assessment Policy for Pupil Welfare</a></li>
+<li><a href="../../Parents/School-Visitors-Policy-Including-Visiting-Speakers/index.html">School Visitors Policy, Including Visiting Speakers Agreement</a></li>
+<li><a href="../../Parents/Volunteer-Policy-20112017180649/index.html">Volunteer Policy</a></li>
+<li><a href="../../Parents/Whistleblowing-Policy/index.html">Whistle Blowing Policy</a></li>
+</ul></li><li><a href="../../Curriculum/Timings-of-the-School-Day/index.html">Timings of the School Day</a>
+</li><li><a href="../../Parents/Term-Dates/index.html">Term Dates</a>
+</li><li><a href="../../Parents/Home-School-Agreement/index.html">Home School Agreement</a>
+</li><li><a href="../../Parents/Lunch-Menu/index.html">Lunch Menu</a>
+</li><li><a href="../../Parents/Uniform/index.html">Uniform</a>
+</li><li><a href="../../Parents/If-You-Have-a-Concern/index.html">If You Have a Concern</a>
+</li><li><a href="../../Parents/Home-School-Association-WHSA/index.html">Home School Association (WHSA)</a>
+</li><li><a href="../../Parents/Entrance-Exam-Results/index.html">Entrance Exam Results</a>
+</li><li><a href="../../Parents/COVID-19-Documents/index.html">Covid 19 Documents</a>
+</li></ul></li><li><a href="../../Curriculum/index.html" id="nav1277">Curriculum</a>
+<ul><li><a href="../../Curriculum/Pastoral-Care-Social-Development/index.html">Pastoral Care & Social Development</a>
+</li><li><a href="../../Parents/PSHE-Scheme-of-Work/index.html">PSHE Policy & Scheme of Work</a>
+</li><li><a href="../../Curriculum/Sport/index.html">Sport</a>
+</li><li><a href="../../Curriculum/Pupil-Assessment/index.html">Pupil Assessment</a>
+</li><li><a href="../../Curriculum/Curriculum-policies/index.html">Curriculum Policies</a>
+<ul><li><a href="../../Curriculum/Marking-Policy/index.html">Marking Policy</a></li>
+<li><a href="../../Parents/Learning-Support-Policy/index.html">Learning Support Policy</a></li>
+<li><a href="../../Parents/EAL-English-Additional-Language/index.html">EAL (English Additional Language)</a></li>
+<li><a href="../../Parents/Able-Gifted-Talented-Policy/index.html">Able, Gifted & Talented Policy</a></li>
+<li><a href="../../Parents/Information-for-Parents-of-Able-Gifted-and-Talente/index.html">Information for Parents of Able, Gifted and Talented Pupils</a></li>
+<li><a href="../../Curriculum/Homework-Policy/index.html">Homework Policy</a></li>
+<li><a href="../../Curriculum/Handwriting-Policy/index.html">Handwriting Policy</a></li>
+</ul></li><li><a href="../../Curriculum/Individual-Subjects/index.html">Individual Subjects</a>
+<ul><li><a href="../../Curriculum/Creative/index.html">Creative</a></li>
+<li><a href="../../Curriculum/Mathematics/index.html">Mathematics</a></li>
+<li><a href="../../Curriculum/French/index.html">French</a></li>
+<li><a href="../../Curriculum/ICT/index.html">ICT</a></li>
+</ul></li><li><a href="../../Years-1-6/index.html">Years 1 - 6</a>
+<ul><li><a href="../../Transition-to-Year-1-Notes-for-Parents/index.html">Transition to Year 1 - Notes for Parents</a></li>
+<li><a href="../../Years-2-6-Notes-for-Parents/index.html">Years 2 - 6 Notes for Parents</a></li>
+<li><a href="../../Senior-School-Preparation/index.html">Senior School Preparation</a></li>
+</ul></li><li><a href="../../Curriculum/EARLY-YEARS/index.html">Early Years</a>
+<ul><li><a href="../../EarlyYears/Welcome-to-the-Early-Years-at-Westward/index.html">Welcome to the Early Years at Westward</a></li>
+<li><a href="../../EarlyYears/Reception-Welcome-Information/index.html">Reception Information</a></li>
+<li><a href="../../EarlyYears/Transition-to-Year-1/index.html">Parents</a></li>
+<li><a href="../../EarlyYears/Early-Years-Curriculum/index.html">Early Years Curriculum</a></li>
+</ul></li></ul></li><li><a href="../../ExtraCurricular/Clubs/index.html" id="nav1323">Extra Curricular</a>
+<ul><li><a href="../../ExtraCurricular/Visits-Outings/index.html">Visits & Outings</a>
+</li><li><a href="../../ExtraCurricular/Extend-Day-Breakfast-After-School/index.html">Extend Day Breakfast / After School</a>
+</li><li><a href="../../ExtraCurricular/Clubs/index.html">Clubs</a>
+</li></ul></li><li><a href="../../Admissions/Prospectus-Pack/index.html" id="nav1279">News</a>
+<ul><li><a href="../../News/index.html">News Listing</a>
+</li><li><a href="../../Diary/index.html">Diary Listing</a>
+</li><li><a href="../../Calendar/index.html">Calendar</a>
+</li><li><a href="../../News/Galleries/index.html">Galleries</a>
+</li><li><a href="../../News/Facebook/index.html">Facebook</a>
+</li></ul></li><li><a href="../../Contact-Us/index.html" id="nav1281">Contact</a>
+</li></ul>
+	                    </nav>
+	                </div>
+	            </div> <!-- wrapper -->
+	        </section>
+            
+        </header><!-- Main Holder -->
+    
+    
+    
+    
+
+	<!-- Main Holder -->
+
+	<div id="mainholder">
+
+	<div class="Content2Column">
+<h1>Galleries</h1>
+
+	<style type="text/css">
+		.clearfix:after {content: ".";display: block;height: 0;clear: both;    visibility: hidden;}
+		#GalleryList .singlegallery {float: left;position: relative; overflow: hidden;  display:inline-block; }	
+		#GalleryList .singlegallery:nth-of-type(even) {}
+		#GalleryList .singlegallery a.thumblink {display: inline-block;    width: 100%;    background: #000;    color: #fff;}	
+		#GalleryList .singlegallery a.thumblink .thumb-wrap {height: 300px;   opacity: .5; -webkit-transition: all 0.3s ease-in-out;    -moz-transition: all 0.3s ease-in-out;    transition: all 0.3s ease-in-out;      background-repeat: no-repeat;    background-position: center top;    background-size: cover;}
+		#GalleryList .singlegallery a.thumblink:hover .thumb-wrap {opacity: .4; transform: scale(1.2); transition: all .5s;}
+		#GalleryList .singlegallery a.thumblink .summary {word-break:break-word; text-shadow: 1px 1px 8px rgba(103,103,103,0.99); line-height:1.5em; width: calc(100% - 20px); padding:0 10px;   display: block;    position: absolute;    top: 20%;    left: 0;    text-align: center;    margin-top: -20px;}
+		#GalleryList .singlegallery a.thumblink .summary .title {margin: 5px 0;    font-size: 20px; line-height:25px;    font-weight: bold;}
+		#GalleryList .singlegallery a.thumblink .summary .title span {margin: 5px 0; font-size:14px; display:block; font-weight:normal }
+		#GalleryList .singlegallery a.thumblink .summary .count {    font-size: 15px;    display: block;    margin: 0 0 5px 0;}
+		#GalleryList .singlegallery a.thumblink .summary .description {    font-size: 15px;    display: block;    margin: 0 0 5px 0;}
+		#galleryholder h2 {text-transform:uppercase}
+		@media only screen and (min-width : 900px){
+		#GalleryList .singlegallery {width:calc(33% - 18px);margin: 0 30px 30px 0; height:250px}	
+		#GalleryList .singlegallery:nth-child(3n) {margin-right:0;}
+		}
+		@media only screen and (max-width : 899px) 	{
+			#GalleryList .singlegallery:nth-child(odd) {margin:0 15px 30px 0; width:calc(50% - 15px); }
+			#GalleryList .singlegallery:nth-child(even) {margin:0 0 30px 15px; width:calc(50% - 15px);}
+			#GalleryList .singlegallery a.thumblink .thumb-wrap {height: 200px;}
+			#GalleryList .singlegallery a.thumblink .summary .title {font-size:17px}
+		}
+	</style>
+    <div id="GalleryListHolder"> 
+		  
+        <div id="GalleryList" class="clearfix">
+        
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15583&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20200929160523%5FIMG%5F0960%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 4 Chertsey Museum - The Tudors
+                                        <span>29th Sep 2020 - 12 images</span>
+                                    </p>
+                                    <p class="description">The Year 4 class had a most informative workshop with Chertsey Museum learning about the Tudors. There was lots of fun and learning going on. Thank you Chertsey Museum.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15582&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20200929155949%5FIMG%5F0919%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 6 Chertsey Museum - WW2
+                                        <span>29th Sep 2020 - 15 images</span>
+                                    </p>
+                                    <p class="description">Year 6 were very excited to be able to learn more about World War 2 with the teacher from Chertsey Museum. Having only had one lesson in class to date, Emily was most impressed with the childrens knowledge.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15579&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20200729115713%5FIMG%5F0758%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Farewell to the Leavers
+                                        <span>29th Jul 2020 - 36 images</span>
+                                    </p>
+                                    <p class="description">We had an absolutely wonderful morning with the Year 6 leavers. The staff were entertained by the childrens singing, musical recitals, magic, dancing and prize giving. </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15543&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20200313111422%5FDSC03980%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 1 & 2 Concert
+                                        <span>13th Mar 2020 - 19 images</span>
+                                    </p>
+                                    <p class="description">On Wednesday we had the Year 1 & 2 Concert. Year 1 thrilled the audience with their play on as did the Year 2s who took us on a journey to Ancient Egypt. Well done to both classes for such a lovely concert.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15541&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20200310095130%5FIMG%5F0552%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        World Book Day Assembly
+                                        <span>10th Mar 2020 - 10 images</span>
+                                    </p>
+                                    <p class="description">On Friday 6 March books came alive at Westward, with the children dressed up as book characters. It was really great to see all the different costumes. Well done everyone.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15540&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20200310094601%5FIMG%5F0528%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Kids With Bricks (Lego Club)
+                                        <span>10th Mar 2020 - 7 images</span>
+                                    </p>
+                                    <p class="description">Our first full Kids With Bricks session was enjoyed by all who attended.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15539&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20200310094046%5FDSC03934%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 2 Seaside Workshop
+                                        <span>10th Mar 2020 - 12 images</span>
+                                    </p>
+                                    <p class="description">The Year 2 class was visited by Chertsey Museum last week to talk about the seaside. They had a lot of fun learning about and dressing up for the seaside. A very worthwhile workshop.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15538&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20200310093508%5FDSC03917%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        ISA Tag Rugby
+                                        <span>10th Mar 2020 - 8 images</span>
+                                    </p>
+                                    <p class="description">The Tag Rugby team travelled to The Mead School to take part in the annual ISA Tag Rugby Tournament. The team acquitted themselves well and did themselves proud.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15527&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20200204111045%5FDSC03690%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 5 & 6 Mixed Hockey v Staines Prep
+                                        <span>4th Feb 2020 - 10 images</span>
+                                    </p>
+                                    <p class="description">The last day of January saw the Year 5 & 6 Mixed Hockey teams travel to Staines Prep. The rain held off and  the teams aquitted themselves well, with the 'B' team drawing 0 - 0 and the 'A' team winning 6 - 1. Well done to the teams.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15526&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20200204105405%5FDSC03660%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 1 & 2 trip to Haslemere Museum
+                                        <span>4th Feb 2020 - 18 images</span>
+                                    </p>
+                                    <p class="description">On Thursday 30th January the Year 1 & 2 classes travelled to Haslemere Museum for a very exciting visit. The Year 1's were looking at colours in nature and the Year 2's had fun learning about The Egyptians. The highlight of the Year 2 visit was mummyfying their dolls.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15519&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20200129105420%5FDSC03648%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 6 Chertsey Museum - The Victorians
+                                        <span>29th Jan 2020 - 7 images</span>
+                                    </p>
+                                    <p class="description">The Year 6 class was visited by Chertsey Museum on Tuesday 28 January. The class learned all about the Victorians, dressed up in clothes of the era and played with Victorian toys. They should be ready for their trip to the Victorian classroom in the near future.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15518&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20200129104514%5FDSC03617%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 6 Pizza Express Visit
+                                        <span>29th Jan 2020 - 5 images</span>
+                                    </p>
+                                    <p class="description">The  Year 6 class visited the Walton Pizza Express recently after their exams. They had great fun making their pizzas and really enjoyed eating them.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15507&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20191219134225%5FDSC03585%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Christmas Service
+                                        <span>19th Dec 2019 - 10 images</span>
+                                    </p>
+                                    <p class="description">We had a wonderful Christmas Service in St Andrew's Church, with the children taking us on a journey around the world, showing us how other countries celebrate Christmas. Well done everyone!</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15506&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20191219133316%5FDSC03524%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Miller's Ark
+                                        <span>19th Dec 2019 - 25 images</span>
+                                    </p>
+                                    <p class="description">The school were treated to a fantastic morning cuddling, touching and enjoying the lovely animals. There were pigs, goats, donkeys, ducks, geese, chickens and a lovely cuddly rabbit.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15478&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20191203100643%5FDSC03456%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 6 - Chertsey Museum trip
+                                        <span>3rd Dec 2019 - 12 images</span>
+                                    </p>
+                                    <p class="description">The Year 6 class travelled to Chertsey Museum, all dressed like evacuees, to learn about the Second World War. They had a most productive day making gas masks, dressing up and generally learning about the hardships faced by all during the war.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15476&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20191125104221%5F001%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Walton Festival of Light
+                                        <span>25th Nov 2019 - 6 images</span>
+                                    </p>
+                                    <p class="description">On Saturday 23rd November the choir performed at the Walton Festival of Light. The all sang really well and entertained the parents and other onlookers. Well done to the choir for doing so well.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15474&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20191120121629%5F002%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        The Power of One
+                                        <span>20th Nov 2019 - 10 images</span>
+                                    </p>
+                                    <p class="description">On Monday morning the school was treated to a very good play, 'The Power of One' to emphasise the Anti Bullying Week at school. The children really enjoyed the show and learned a lot.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15464&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20191017113329%5F001%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Harvest Festival Assembly
+                                        <span>17th Oct 2019 - 7 images</span>
+                                    </p>
+                                    <p class="description">The Year 4 class led a very good moving Harvest Assembly. The donations for the Hersham & Walton Food Bank were overwhelming and the tables wre full to bursting. Thank you all for your generosity.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15463&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20191017112846%5F001%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Lego Sports City Workshop
+                                        <span>17th Oct 2019 - 47 images</span>
+                                    </p>
+                                    <p class="description">The school was treated to a special day building a Sports City from Lego. All the children worked very well together and developed a wonderful Sports City. Thank you to all concerned for an exciting, creative day.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15454&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20191010104550%5F113%2Ejpg/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        ISA East Triathlon
+                                        <span>10th Oct 2019 - 16 images</span>
+                                    </p>
+                                    <p class="description">Twelve boys and girls travelled to Hutton Manor to take part in the annual East Triathlon. The going was tough after the rain, but both teams put in excelent performances - the girls managed to come second and the boys twelfth. Katie was pipped, by a whisker, into second place in the girls' event.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15452&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20191010103643%5F001%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        The WonderDome
+                                        <span>10th Oct 2019 - 12 images</span>
+                                    </p>
+                                    <p class="description">On Wednesday 2nd October,  Early Years, Years 1, 2 and 3 were treated to a session in the Wonder Dome Planetarium. This gave the children a wonderful insight into Space, the planets and the Milky Way. </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15445&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190927142123%5F004%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 6 Posts of Responsibilty
+                                        <span>27th Sep 2019 - 13 images</span>
+                                    </p>
+                                    <p class="description">At a special assembly the Year 6 children received their badges of office. All of them were really proud. Well done to them all!</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15442&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190924120725%5F001%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Visiting Author
+                                        <span>24th Sep 2019 - 26 images</span>
+                                    </p>
+                                    <p class="description">On Tuesday 24 September, Sarah Holding, the author of the SeaBEAN trilogy, visited the school. The Years 5 & 6 had a most instructive Creative Writing workshop with her. Some of the children bought her books and received a signed copy. A most productive morning.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15441&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190920135450%5F001%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 6 Posts of Responsibilty
+                                        <span>20th Sep 2019 - 28 images</span>
+                                    </p>
+                                    <p class="description">Democracy at work. The Year 6's presented their talks to the school about the positions they want to hold this year. There were some excellent speeches (budding politicians). The school then exercised their rights by voting for the children they wanted to fill the posts of responibility. A really worthwhile lesson for everyone. </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15439&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190920113046%5F062%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 6 World War 2 Workshop
+                                        <span>20th Sep 2019 - 24 images</span>
+                                    </p>
+                                    <p class="description">Chertsey Museum visited the school recently to run a World War 2 workshop with the Year 6 class. The class were treated to a thoroughly informative and interesting workshop and they learned a lot about the war.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15411&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190716120234%5F001%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        The Twits - Year 6 Play
+                                        <span>16th Jul 2019 - 15 images</span>
+                                    </p>
+                                    <p class="description">The Year 6 class pulled out all the stops to thoroughly entertain the school and their parents with their rendition of The Twits. One child remarked that it was the best Year 6 play they had seen. Well done Year 6!</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15408&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190708100436%5F001%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Mission Moon - Robotics
+                                        <span>8th Jul 2019 - 15 images</span>
+                                    </p>
+                                    <p class="description">The Year 5 Robotics Club were tasked with designing a Moon Base as part of their Robotics Club. The boys put a tremendous amount of work into their projects and produced good work. They displayed the final results to the school and to their parents. They even had some pirates looking for treasure on the Moon.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15406&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190703101500%5FIMG%2D20190619%2DWA0002%2Ejpg/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        ISA National Athletics
+                                        <span>3rd Jul 2019 - 1 images</span>
+                                    </p>
+                                    <p class="description">Four young ladies represented London South at the ISA National Athletics Championship recently. It was a long day, but that didn't deter the girls. They acquitted themselves well and should be proud of their achievements.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15405&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190703101140%5FIMG%5F1600%5Fisa%5Fcricket%2Ejpg/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        ISA Kwik Cricket
+                                        <span>3rd Jul 2019 - 1 images</span>
+                                    </p>
+                                    <p class="description">The u9 boys took part in the ISA Kwik Cricket at Beckenham Sports Club recently. They had a lot of fun and learned a lot about the game. A day well spent.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15402&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190628120438%5F001%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 6 Stalls
+                                        <span>28th Jun 2019 - 22 images</span>
+                                    </p>
+                                    <p class="description">What a fun day! The Year 6 class put together a really good stalls event on Friday 28 June. There was something for everyone to do, the cakes were delicious and the organisation slick. Thank you to Mrs Williams and Year 6 and to all the generous parents.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15397&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190624115928%5F009%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 1 & 2 Painshill Park Trip
+                                        <span>24th Jun 2019 - 70 images</span>
+                                    </p>
+                                    <p class="description">The Year 1 & 2 classes had a very enjoyable trip to Painshill Park on Thursday 20 June. They learned how to make a fire and a host of other exciting things.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15392&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190617150425%5F001%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        The Stone Age
+                                        <span>17th Jun 2019 - 9 images</span>
+                                    </p>
+                                    <p class="description">After the visit to the school by Chertsey Museum, the Year 2 class had a project on the Stone Age. They could do anything related to what they had learned. Ther ewere an array of weapons, jwellery and hoses. The class presented their projects to the school in assembly.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15391&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190617120026%5FP1100318%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 5 & 6 PGL Trip
+                                        <span>17th Jun 2019 - 139 images</span>
+                                    </p>
+                                    <p class="description">The Year 5 & 6 classes travelled to the Isle of Wight to go to PGL Little Canada recently. Despite getting sodden on the Friday, a good time was had by all. The children did lots of exciting activities as the photos show.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15369&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190528113231%5F001%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Miss Luksch Farewell
+                                        <span>28th May 2019 - 13 images</span>
+                                    </p>
+                                    <p class="description">The Year 1 class had a special tea to bid farewell to Miss Luksch. The children really enjoyed the goodies they had to eat and a fun, but sad time was had by all who attended. Thank you to the parents who were able to attend. We wish Miss Luksch everything of the best in her new venture in Germany.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15364&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190520112908%5F001%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Rounders Tournament
+                                        <span>20th May 2019 - 6 images</span>
+                                    </p>
+                                    <p class="description">The Year 5 & 6 children were meant to play rounders and cricket against Danesfield, but this was cancelled. Rather than let the opportunity to play go to waste a rounders tournamnet amongst themselves was organised. A fun afternoon was had by all, with England being unbeaten.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15363&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190520112451%5F008%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        ISA Chess Tournament
+                                        <span>20th May 2019 - 1 images</span>
+                                    </p>
+                                    <p class="description">The ISA Chess Tournament Team did well in their first outing to the tournament. A creditable third place.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15362&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190517104510%5F001%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 2 - Chertsey Museum Visit
+                                        <span>17th May 2019 - 30 images</span>
+                                    </p>
+                                    <p class="description">Tuesday 14 May saw Chertsey Museum visit the Year 2 class to talk to them about The Stone Age, Bronze and Iron Age. The class had a most enjoyable and productive session. Thank you Chertsey Museum.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15357&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190513111748%5F001%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 3 & 4 New Barn trip
+                                        <span>13th May 2019 - 46 images</span>
+                                    </p>
+                                    <p class="description">The Year 3 & 4 children had a fantastic trip to New Barn last week. They had an awe inspiring trip to the Fleet Air Arm Museum where they had a lot to do. Thank you to all the staff that made this possible.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15354&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190507142122%5F016%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Reeds Launch Car Challenge Final
+                                        <span>7th May 2019 - 14 images</span>
+                                    </p>
+                                    <p class="description">On Thursday 2 May two young ladies from Year 5 represented Westward at the Reeds Launch Car Final. They did extremely well and came away with the title, the third time in four appearances for Westward. Well done Sara and Araya, you are a credit to Westward.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15350&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190502160259%5F007%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 4 Bikeability
+                                        <span>2nd May 2019 - 8 images</span>
+                                    </p>
+                                    <p class="description">On the second and third days of term the year 4's were hard at it, doing their Level 1 Bikeability training. By all accounts, they did really well and learned a lot about Road Safety and safety on their bicycles. A big thank you to the trainers for a job well done.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15341&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190410142818%5FIMG%5F0242%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Easter Service
+                                        <span>10th Apr 2019 - 21 images</span>
+                                    </p>
+                                    <p class="description">On the final Wednesday of the term the Year 6 class led the school in the Easter Service. All the classes added to the success of the service - well done everyone!</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15336&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190405073217%5FDSC02780%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 1 Science Homework
+                                        <span>5th Apr 2019 - 20 images</span>
+                                    </p>
+                                    <p class="description">The Year 1 class were given the the task of designing a flower from a paper plate for their Science homework. The results are here for you to see.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15331&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190403102004%5FDSC02513%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Dan the Skipping Man
+                                        <span>3rd Apr 2019 - 145 images</span>
+                                    </p>
+                                    <p class="description">On Wednesday 27 March the children were treated to Dan the Skipping Man. A lot of fun was had, as the photographs testify.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15324&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190326151114%5FDSC02319%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 6 Fun Day
+                                        <span>26th Mar 2019 - 10 images</span>
+                                    </p>
+                                    <p class="description">The Year 6 class travelled to Guildford Spectrum for their fun day. By all accounts it was indeed a fun day!</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15323&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190326135953%5FDSC02745%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 6 Volcanos
+                                        <span>26th Mar 2019 - 15 images</span>
+                                    </p>
+                                    <p class="description">The Year 6 class was tasked with making volcanoes and getting the lava to flow. The telling day arrived, with much anticipation. The smell of vinegar permeated the air and we all waited with bated breath to see if the experiments would work. They did indeed work, making all the children's efforts worthwhile.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15322&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190326135034%5FDSC02313%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Sport v Ashton House
+                                        <span>26th Mar 2019 - 6 images</span>
+                                    </p>
+                                    <p class="description">On Friday 22 March we had a netball and football teams tarvel to Grasshoppers Club to play sport against Ashton House. The teams met with mixed fortunes, but a lot of fun and learning was done in the process. Thank you to the staff who travelled and Brutons Coaches for getting us ther and back safely.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15321&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190326133101%5FDSC02648%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 4 Chertsey Museum - Tudor Day
+                                        <span>26th Mar 2019 - 31 images</span>
+                                    </p>
+                                    <p class="description">The Year 4 class recently visited the Chertsey Museum to learn about the Tudors. The visited the monastary sacked during the reign of Henry VIII and had fun dressing up. All in all, a very productive day.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15315&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190319095037%5FDSC02616%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Football v Cleves
+                                        <span>19th Mar 2019 - 29 images</span>
+                                    </p>
+                                    <p class="description">On a windy Friday afternoon for year groups descended on Cleves School to do batlle on the football pitch. After a few minor mishaps, the boys had an enjoyable afternoon. Well done to all the boys that played.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15314&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190319093431%5FDSC02584%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Westward Netball Tournament
+                                        <span>19th Mar 2019 - 10 images</span>
+                                    </p>
+                                    <p class="description">The annual Westward Netball Tournament was held on Wednesday 13 March, despite the wind. A great tournament was had, with the 'A' team winning it. Well done girls!</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15310&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190314165141%5FDSC02595%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 6 French Cafe
+                                        <span>14th Mar 2019 - 8 images</span>
+                                    </p>
+                                    <p class="description">The Year 6 class were visitors to a French Cafe, run by Mr Williams. The had a lot of fun eating and speaking French.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15309&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190314164649%5FDSC02274%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 1 & 2 Plays
+                                        <span>14th Mar 2019 - 19 images</span>
+                                    </p>
+                                    <p class="description">Congratulations Year 1 and Year 2 on your simply splendid performances.   Year 1 entertained us with their alphabet poetry and songs, with a delightful piano recital from Oliver and we then journeyed back in time to the land of the Pharaohs with Year 2.   Thank you parents for being such a lovely audience.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15306&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190314115749%5FDSC02264%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        World Book Day Assembly
+                                        <span>14th Mar 2019 - 32 images</span>
+                                    </p>
+                                    <p class="description">The school all dressed up for World Book Day as book characters. It was really super to see the effort that was made by the children. The day was celebrated in a special assembly.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15305&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190314112311%5FDSC02239%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Inter House Quiz
+                                        <span>14th Mar 2019 - 17 images</span>
+                                    </p>
+                                    <p class="description">The four houses pitted their quiz skills against one another on Friday 8 March. The quiz was closely contested and the evntual winners were St Patricks. Well done to all the children that took part.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15304&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190314111118%5FDSC02419%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Reeds Launch Car Challenge
+                                        <span>14th Mar 2019 - 54 images</span>
+                                    </p>
+                                    <p class="description">The Year 5 class recently took part in the annual Reeds Launch Car Challenge. Here the class is hard at work.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15280&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190307124857%5FDSC02071%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 3 Trip to Chertsey Museum
+                                        <span>7th Mar 2019 - 37 images</span>
+                                    </p>
+                                    <p class="description">The Year 3 class travelled to Chertsey Museum on Wednesday 6 March. The class dressedup, made pots and learned about the Victorians and Romans. Not only did they learn about History, they had fun doing so. A big thank you to Cherstey Museum for a lovely day out.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15275&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190301075042%5F2019%2D02%2D28%5F10%2E13%2E52%2Ejpg/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 6 Exam Celebration Assembly
+                                        <span>1st Mar 2019 - 14 images</span>
+                                    </p>
+                                    <p class="description">The Year 6 class celebrated the end of the exam process in style at a special celebratory assembly.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15274&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190301074106%5F2019%2D02%2D27%5F09%2E14%2E02%2Ejpg/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 2 Seasides Workshop
+                                        <span>1st Mar 2019 - 14 images</span>
+                                    </p>
+                                    <p class="description">Year 2 enjoyed a completely splendid Seasides Workshop with the Chertsey Museum on Wednesday, promenading with parasols around the classroom and making their own Punch puppets. </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15269&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190220133442%5FDSC02514%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Reeds Launch Car Challenge
+                                        <span>20th Feb 2019 - 10 images</span>
+                                    </p>
+                                    <p class="description">On the Thursday before half term the Year 5 class went to Reeds School to take part in their annual Launch Car Challenge. The children had to see how far their cars, which they had designed and made, travelled. The team of Sara and Araya were the eventual winners and will represent Westward at the Inerschool Challenge.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15268&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190220131039%5F2019%2D02%2D12%5F14%2E38%2E09%2Ejpg/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 1 Play!
+                                        <span>20th Feb 2019 - 15 images</span>
+                                    </p>
+                                    <p class="description">Following their trip to the Haslemere Museum, Chertsey Museum lent the Year 1 class some Victorian toys. Everyone in the class had a lot of fun testing the toys out. </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15259&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190214102004%5FDSC02376%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 4 Play - James and the Giant Peach
+                                        <span>14th Feb 2019 - 25 images</span>
+                                    </p>
+                                    <p class="description">The Year 4 class had a lot of fun telling the story of James and the Giant Peach on Wednesday 13 February. The children had learnt  their words and portrayed their characters really well. Congratulations to you all for the lovely entertainment.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15258&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190214093759%5FDSC02380%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 3 Recital
+                                        <span>14th Feb 2019 - 25 images</span>
+                                    </p>
+                                    <p class="description">The Year 3 class enthralled all who went to watch their recital recently. They really enjoyed reciting their poems and got everyone in the mood. Well done to you all.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15254&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190212180034%5F2019%2D01%2D23%5F12%2E01%2E20%2Ejpg/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 3 Science project
+                                        <span>12th Feb 2019 - 21 images</span>
+                                    </p>
+                                    <p class="description">The Year 3 class had a Science project to do in class. The class enjoyed exploring and experimenting and learned a lot.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15253&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190212174338%5FDSC01977%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Children's Trust Concert
+                                        <span>12th Feb 2019 - 4 images</span>
+                                    </p>
+                                    <p class="description">The Westward choir travelled to Leatherhead to take part in the Children's Trust Concert on Sunday10 February. They sang extremely well and thoroughly enjoyed the concert as a whole. Well done to all the choir members and Mis Luksch for preparing them so well.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15252&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190212173428%5F2019%2D02%2D11%5F09%2E49%2E13%2Ejpg/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 1 Masks
+                                        <span>12th Feb 2019 - 20 images</span>
+                                    </p>
+                                    <p class="description">The Year 1 class were given a homework task to design and make masks. Their efforts were excellent as you will see.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15249&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190212172419%5FLaurence%5F3%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        ISA Fencing
+                                        <span>12th Feb 2019 - 6 images</span>
+                                    </p>
+                                    <p class="description">Congratulations to Laurence who took part in theISA Fencing Tournament and gained a very well deserved Silver Medal. Well done Laurence!</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15243&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190206144303%5F2019%2D02%2D05%5F10%2E29%2E07%2Ejpg/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 5 Printing
+                                        <span>6th Feb 2019 - 45 images</span>
+                                    </p>
+                                    <p class="description">The Year 5 class joined the Year 6 on their trip to Gunnersbury Park Museum on Tuesday 5 February. While the Year 6's were learning about the strict regime in a Victorian classroom, the year 5's were learning about printing. The class had a really enjoyable and positive session with the staff from the museum and printed their own designs on the bag they were given. </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15242&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190206132555%5FDSC02283%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        The Victorian Classroom
+                                        <span>6th Feb 2019 - 23 images</span>
+                                    </p>
+                                    <p class="description">The Years 6 class travelled to Gunnersbury Park Museum to experience what it was like to be in a Victorian classroom. The class reacted very well to the very stict discipline that was in force at the time. The children all learned a lot from this experience.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15241&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190206115023%5FDSC02247%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        E-Safety
+                                        <span>6th Feb 2019 - 22 images</span>
+                                    </p>
+                                    <p class="description">The school was visited by PERFORM on Monday 4 February to talk about e-safety. There were a series of workshops done with the Year 1- 6 children. The children learned a lot about the internet and their safety. </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15237&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190204100445%5FDSC01843%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 1 & 2 trip to Haslemere Museum
+                                        <span>4th Feb 2019 - 34 images</span>
+                                    </p>
+                                    <p class="description">On Wednesday 30 January the years 1 & 2 travelled to Haslemere to the museum to spend the day looking at toys. They had a really enjoyable day out.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=15236&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20190204094125%5FDSC02158%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Year 6 trip to Wagamamas
+                                        <span>4th Feb 2019 - 20 images</span>
+                                    </p>
+                                    <p class="description">The Year 6 class had a very interesting and enjoyable trip to Wagamamas recently. They had fun tasting and preparing food and were given a lovely meal to end their trip.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=14848&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20171017143718%5FP9070017%2Ejpg/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        EYC Photos
+                                        <span>17th Oct 2017 - 6 images</span>
+                                    </p>
+                                    <p class="description"></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+                    <div class="singlegallery clearfix">
+                        <a class="thumblink" href="../../News/Galleries/index.html?SSID=14842&password=#GalleryListHolder" >
+                            <div class="thumb-wrap" style="background-image: url(../../i/photos/gallery/SSmedium/20171016111549%5FIMG%5F0960%2EJPG/index.html);">&nbsp;</div>
+                            <div class="summary">
+                                <div class="wrapp-align">
+                                    <p class="title">
+                                        Early Years Front Page
+                                        <span>16th Oct 2017 - 3 images</span>
+                                    </p>
+                                    <p class="description"></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>          
+                
+        </div>
+	</div>        
+
+</div>
+<div class="ColumnLeft">
+<nav id="SideHeadingPages" class="SideHeading"><h2>Related Pages</h2>
+<ul class="SideList"><li><a href="../../News/index.html" id="subID2131">News Listing</a></li>
+<li><a href="../../Diary/index.html" id="subID2132">Diary Listing</a></li>
+<li><a href="../../Calendar/index.html" id="subID2138">Calendar</a></li>
+<li><a href="../../News/Galleries/index.html" id="subID2137">Galleries</a></li>
+<li><a href="../../News/Facebook/index.html" id="subID80801">Facebook</a></li>
+
+</ul></nav>
+
+
+</div>
+
+
+	</div>
+
+</div>
+
+<!-- Footer -->
+
+
+
+<footer>
+        <div class="wrapper">
+            <!-- GSO Credit -->
+
+			<p>&copy; 2021Westward School&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href="../../legal/index.html">Legal Information</a><br/>47 Hersham Road, Walton-on-Thames, Surrey, KT12 1LE<br>
+				T: 01932 220911&nbsp;&nbsp;&middot;&nbsp;&nbsp;E: <a href="mailto:admin@westwardschool.co.uk?subject=Enquiry%20from%20website">admin@westwardschool.co.uk</a>
+			</p>
+
+            <p id="credit">School Website Powered <br>
+	        by <a href="http://www.greenhouseschoolwebsites.co.uk" target="_blank" rel="nofollow">Greenhouse School Websites</a></p><!-- Contact Details -->
+
+        </div>
+    </footer>
+
+
+
+    <script type="text/javascript" src="../../inc/js/scripts.min.js"></script>
+    <script type="text/javascript">
+
+    // Browser Detection
+    browserBlast({
+    devMode: false,
+    supportedIE: '8',
+    message: "Hey! Your browser is unsupported. Please upgrade for the best experience."
+    });
+
+    // Nivo Slider
+    $(window).load(function() {
+    $('.nivoSlider').nivoSlider({
+      effect: 'fade', 
+      animSpeed: 500,
+      pauseTime: 4000,
+      controlNav: true,
+      directionNav: true, 
+      randomStart: true
+    });
+    });
+    
+     // Reset site search form on focus
+    function resetsearch () { $("#search-field").val(""); }
+
+    $(document).ready(function() {
+
+    // Check to see if there's anything in sidebar
+    var cl = $('.ColumnLeft nav').length;
+    var cr = $('.ColumnRight nav').length;
+
+    // If sidebars are empty, change Content2Column to Content1Column
+    if (cl == 0 && cr == 0) {
+      // $('.Content2Column').attr('class','Content1Column');
+      // $('.ColumnLeft, .ColumnRight').hide();
+    }
+        
+    // Add parent class to 2nd level links with children
+    $("#dmenu li li a").each(function() {
+      if ($(this).next().length > 0) { 
+        $(this).addClass("parent"); 
+      };
+    });
+
+    // Add doubleTapToGo to navigation links
+    $("#dmenu li:has(ul)").doubleTapToGo(); /* touch device menus */
+
+
+	// For mobile website	
+		// Mobile Nav
+		
+		jQuery(document).ready(function () {
+		  jQuery('#navholder nav').meanmenu({
+		    meanMenuContainer: 'div#navholder', // Choose where meanmenu will be placed within the HTML
+		    meanScreenWidth: "750", // set the screen width you want meanmenu to kick in at
+		    meanRevealPosition: "center", // left right or center positions
+		    meanRevealPositionDistance: "", // Tweak the position of the menu from the left / right
+		    meanShowChildren: true, // true to show children in the menu, false to hide them
+		    meanExpandableChildren: true, // true to allow expand/collapse children
+		    meanRemoveAttrs: true, // true to remove classes and IDs, false to keep them
+		    meanDisplay: "block", // override display method for table cell based layouts e.g. table-cell
+		    removeElements: "" // set to hide page elements
+		  });
+		});
+		
+	
+		//RESPONSIVE CODE
+		
+		    function checkWidth() {
+		    var windowSize = $(window).width();
+		    if (windowSize < 750) {
+		      // If mobile: Insert news and diary dates after content on homepage
+		      $(".ColumnRight").insertAfter(".Content2Column");
+		    }
+		    else {
+		      // Otherwise reposition them before the content on homepage
+		      $(".Content2Column").insertAfter(".ColumnRight");
+		
+		    }
+		    }
+		    checkWidth();  
+		    $(window).bind('resize orientationchange', function() {
+		    checkWidth();
+		    });
+	});
+
+</script>
+
+
+
+<!-- reload on orientation or size change -->
+<script type="text/javascript">
+    window.onorientationchange = function() { 
+        var orientation = window.orientation; 
+            switch(orientation) { 
+                case 0:
+                case 90:
+                case -90: window.location.reload(); 
+                break; } 
+    };
+</script><!--end orientation code-->
+
+ <script type="text/javascript" charset="UTF-8" src="https://s3-eu-west-1.amazonaws.com/gsopublic/Cookie+Script/CookieScript_1.js"></script>
+
+ <script type="text/javascript" charset="UTF-8" src="https://s3-eu-west-1.amazonaws.com/gsopublic/Cookie+Script/CookieScript_1.js"></script>
+
+
+
+
+<!-- hide sidebars if empty -->
+<script type="text/javascript">
+	var cleft = $.trim($('.ColumnLeft').text()).length;
+	var cright = $.trim($('.ColumnRight').text()).length;
+	// If sidebars are empty, change Content2Column to Content1Column
+	if (cleft < 4 && cright < 4) {
+	  $('.Content2Column').attr('class','Content1Column');
+	  $('.ColumnLeft, .ColumnRight').hide();	}
+	if (cleft > 4 && cright < 4) {
+	  $('.Content3Column').attr('class','Content2Column');
+	  $('.ColumnRight').hide();	}
+	if (cleft < 4 && cright > 4) {
+	  $('.Content3Column').attr('class','Content2Column');
+	  $('.ColumnLeft').hide();	}
+</script>
+<!--end sidebar hide -->
+
+
+<script type="text/javascript">
+	//$("video").css({"height": "110%", "width": "100%"});
+</script> 
+
+
+
+<!-- inline modal code -->
+	<link rel="stylesheet" href="../../admin/inc/FrontEndFiles/modal/gswMultiModal.css">
+	<script src="../../admin/inc/FrontEndFiles/modal/gswMultiModal.js"></script>
+<!-- end modal code -->
+
+
+<!-- Stats -->
+
+
+
+</body>
+</html>
+

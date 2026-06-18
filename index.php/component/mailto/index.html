@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb" dir="ltr">
+<head>
+<script>
+(function() {
+  var search = window.location.search;
+  function normalizeQuery(q) {
+    if (!q) return '';
+    if (q.indexOf('?') === 0) q = q.substring(1);
+    var parts = q.split('&');
+    var params = [];
+    for (var i = 0; i < parts.length; i++) {
+      if (!parts[i]) continue;
+      var p = parts[i].split('=');
+      var key = decodeURIComponent(p[0]);
+      var val = p.length > 1 ? decodeURIComponent(p[1]) : '';
+      params.push([key, val]);
+    }
+    params.sort(function(a, b) {
+      if (a[0] !== b[0]) return a[0] < b[0] ? -1 : 1;
+      return a[1] < b[1] ? -1 : 1;
+    });
+    var encoded = [];
+    for (var i = 0; i < params.length; i++) {
+      encoded.push(encodeURIComponent(params[i][0]) + '=' + encodeURIComponent(params[i][1]));
+    }
+    return '?' + encoded.join('&');
+  }
+  var normSearch = normalizeQuery(search);
+  var manifest = {
+  "?link=0987d2bf3ce7d6676ffcfdc98422ee6fdd05e0d8&tmpl=component": "variants/21bd36f0468e6d98209094bc3ebe2408ccf4ae43.00000229.html",
+  "?link=0cd897fe6703b49ca8482d4430c63e18f21038b9&tmpl=component": "variants/f2b24008758c1e00975eb27e50c120dd72b44499.00000230.html",
+  "?link=0e250da61b371e30bd02e9ad14e18b1349a2a2cf&tmpl=component": "variants/9931e08b2dad585236c4440d7581ae6a8da13fab.00000231.html",
+  "?link=0fbd5f7e58ed23a007eb0af395968f80289107d8&tmpl=component": "variants/ce01d7a50aec9e654665d5bfe53cfd826ead7e5d.00000232.html",
+  "?link=1c533bcd8911aea2ba722bd31986b9ad1b396fee&tmpl=component": "variants/02b07a807af3f47faecceb4354fd57dcf0377b56.00000233.html",
+  "?link=1c7af8550967c3f27e463b85ac1bf042be920a9f&tmpl=component": "variants/2207580117769b06c6c24402cfede984d923ff89.00000234.html",
+  "?link=20d9ced2a443566b1e750ef2451d16107dc2f0aa&tmpl=component": "variants/3a561e73adc247be32de37767ac2c8f6f15a68d7.00000235.html",
+  "?link=25ddb422a71eef3e13cfd6b35674cd24e0bc99e7&tmpl=component": "variants/e469002e60b20d9b0d87d1404c948378c2ae0749.00000236.html",
+  "?link=2acd7381351159a367d7e8502695ee1ae5951075&tmpl=component": "variants/efbb81b6d8f8b7604dcfbeef157360d3f7fac336.00000237.html",
+  "?link=2e7b88539f9e8d9599fcfb7120520a7d48c96f70&tmpl=component": "variants/1010e01c2e99914b5833a5cd038ed5d39e07b4bc.00000238.html",
+  "?link=2ebc027fc151c3c2d64dbec548c88c9e9fa8f9aa&tmpl=component": "variants/845748c8aa5a416ca47902ad9c866a2445f6749d.00000239.html",
+  "?link=3c429e2102ab918e658538a204a645efef13f547&tmpl=component": "variants/3408af58a1a87a0fa6fdeb385cd381aa038b0453.00000240.html",
+  "?link=3fc0c01fd2ebdd03dfe847a3d9d1c5eabf683e2f&tmpl=component": "variants/3a69fef8b40908ea7adf2c782af1162136858455.00000241.html",
+  "?link=45ff7e1e0f420c803aa725509110ed781fa25dbc&tmpl=component": "variants/d720f838f7f35de1de48f3ce1bd08b5f7f9f9303.00000242.html",
+  "?link=49e4b7866b156b44dfced10593b4abc70169f25f&tmpl=component": "variants/a5e93ad96456198cbcaddd20592ad17e6694ffdb.00000243.html",
+  "?link=4c9119a7b34dd7b98cdacea1f12bea09fd34c3ce&tmpl=component": "variants/a3e6953fbede63bba8e646aa215239ed76e16c3a.00000244.html",
+  "?link=524cbb14078ac60ce5c92c7df34c6adbbefcac82&tmpl=component": "variants/af3346b6ffedbbf8711ba5c9aa42214c6e817aa5.00000245.html",
+  "?link=58971041d072a44af21d1338990c65ca887469c6&tmpl=component": "variants/f0c60d399d09ab368dcfb909b5949cd176b66872.00000246.html",
+  "?link=5aaef332522517ae3eea942fc36cb9b7cd440855&tmpl=component": "variants/66f43017c7bdc343dd0dd121546756141afd2a11.00000247.html",
+  "?link=5b013f3e941fc3713565554ff40f628a4e9d169e&tmpl=component": "variants/d5ea8ededa923f88be56fd66985b0c834513ce14.00000248.html",
+  "?link=62a310bb0166a4373b601df39f3ad5482b23eb25&tmpl=component": "variants/e100203acbe9302a59060984eba7481ace493a0e.00000249.html",
+  "?link=6414792f63bbbcdc37f868a51eaba0c2faab3dfc&tmpl=component": "variants/126d15f5e06e546593d4745457044fd62cbbda9f.00000250.html",
+  "?link=693dc83ae13ebe5bf5e474dba09c4d33522f9a1f&tmpl=component": "variants/093a7fb7f04aab65a5b412556a13b923380d76b3.00000251.html",
+  "?link=69970c9541ab7ed639cfc8acd9384664e12d1770&tmpl=component": "variants/53928058a737dda4f7538139a5bb05947b596a2f.00000252.html",
+  "?link=73fe89fe2b2c7ea01c67afc864719ffaf5da714d&tmpl=component": "variants/df13d76d3729d5564e980db1833a70bcdd6cee7d.00000253.html",
+  "?link=7be2bbc0a444df54dbe36879f14d16f20becd0fc&tmpl=component": "variants/b9af8186d3daf261f1faf431f2a2e1ca382776ea.00000254.html",
+  "?link=83d87a3710df3b00fdf02a2e24b17f1fce305899&tmpl=component": "variants/727cab3dc92ad936a1672505fa0291dfedbc6854.00000255.html",
+  "?link=84e401073e861b9acaab4690f7370b0465d34fff&tmpl=component": "variants/53bd86954f6a5cb20f5b61733b569da1af6dbd5e.00000256.html",
+  "?link=894702d65f7c279e1cbba1acb0860d8f72221a46&tmpl=component": "variants/aa44fcb33992720ad2ccd13c522258c66d2b5e42.00000257.html",
+  "?link=92894b76734bc5cd1dcdc804a024dd0546eebd4c&tmpl=component": "variants/43fd3a0e940aeff6404aafad4324056672953c3b.00000258.html",
+  "?link=9bf6806b966d1b1e6847a44a19e8b2aefa7c5d77&tmpl=component": "variants/c49b9d1486112de4f203dad23e00eafbc7e8e9ac.00000259.html",
+  "?link=9f79fdf2fb822a26e5b9977faa4c97c37efa42df&tmpl=component": "variants/88ec37c03e9306bf816f59766781ccfd4a80f54f.00000260.html",
+  "?link=b66244b1d5f8b397a893e69cc16543e0ac2649d7&tmpl=component": "variants/e005ac9f5a9a6b7564ff2cc0e08d3b442b513892.00000261.html",
+  "?link=b86c83e16ab85d8494888fdb6ffe53e29479f634&tmpl=component": "variants/f31ff3b727903ec83e3fbd22ea0945620aaa6504.00000262.html",
+  "?link=b967c2b13d70a4c570ef2a54b4b42145f65e051f&tmpl=component": "variants/c6800ed8662181b3c07b783fe390b85f10580700.00000263.html",
+  "?link=bddabc329ff9e1e87b759a8b4653ab55d33ab4d6&tmpl=component": "variants/840763a28412586c0ed5255876df409256c3d5e0.00000264.html",
+  "?link=c063d7c8de9a01e16711ef9efda90a5207945313&tmpl=component": "variants/b116a066b7931e49205473bac07348fedf34f88d.00000265.html",
+  "?link=c5e1f0826adfa83072fd39cd183003590ff6ca0d&tmpl=component": "variants/0ee68c7cb6710633c6ce9323f16a7220ffd4ef32.00000266.html",
+  "?link=cc8a22dfa997613ee2700becb910e8a080ee5cad&tmpl=component": "variants/df811959bb2d45cd674f9ddace6bd866b182718e.00000267.html",
+  "?link=d492ea983d0392230fb24282cec2b7a12ac7ca89&tmpl=component": "variants/f92942b23be358b413b5191c9e0f7e6589380222.00000268.html",
+  "?link=dc7c095a43cd0647e8c440e5ca697a5c45515b08&tmpl=component": "variants/b4406d71d262eaf044d679061f3650f2902ea750.00000269.html",
+  "?link=dea4935bfcb40c2bff71964743dd3fee42e8cf91&tmpl=component": "variants/ae26d788b116ab5bf917059c0298a8596108197e.00000270.html",
+  "?link=ee1c8eaa12c386b9fd099acc873174b11ad4ffed&tmpl=component": "variants/4d78b9afb0056df47cd3d8e349ec639010ae36d6.00000271.html",
+  "?link=eeeb19143bbf5244ac2faa0a552c6182f95de68f&tmpl=component": "variants/0be29d45a97be49ae35b13250cf98e69f927adce.00000272.html",
+  "?link=f09c43fb333abc4d837f1ea14e382933b8148bd5&tmpl=component": "variants/aae899e80165b38fd40136d8104b4dd6e0b3cd83.00000273.html",
+  "?link=fcee8997cbac02c8b85276ae03aaaa26e07c187f&tmpl=component": "variants/ab4cb13dc0a14f25fb0f312605e97b246fff38bc.00000274.html",
+  "?link=fd8ef5dafd0c5fbc4faead086c685395a6001148&tmpl=component": "variants/052366b7836448e5a1d6d094aefc7688630d80b2.00000275.html",
+  "?link=ff90c64f7c21c8ce5edacf09582f7c994dd1a50a&tmpl=component": "variants/c809115da7e7eeafb597cf5885e4873e2a7fb6c3.00000276.html",
+  "?link=ffe76d7000fa1e0837c664db415c4e5fa3873e6f&tmpl=component": "variants/a03a056507d5b92f2b967549597b34545dc0c10e.00000277.html"
+};
+  var variant = manifest[normSearch];
+  if (variant) {
+    document.documentElement.style.display = 'none';
+    if (variant.toLowerCase().endsWith('.pdf')) {
+      window.location.href = variant;
+      return;
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', variant, false);
+    try {
+      xhr.send();
+      if (xhr.status === 200) {
+        document.documentElement.style.display = '';
+        document.open();
+        document.write(xhr.responseText);
+        document.close();
+      } else {
+        document.documentElement.style.display = '';
+      }
+    } catch (e) {
+      document.documentElement.style.display = '';
+    }
+  }
+})();
+</script>
+	  <base href="../../../index.php/component/mailto/index.html" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  
+  <meta name="keywords" content="Westward School, Westward, Walton-on-Thames, Walton, Surrey, Elmbridge, School, Independant School, Private School, Hersham Road" />
+  <meta name="description" content="Westward is an independent co-educational school for children from nursery age to eleven-plus. Westward enjoys a reputation for traditional standards and high academic achievements which goes hand in hand with development of caring personalities and individuality." />
+  
+  <title>Westward School</title>
+  <link href="../../../templates/system/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+	<link rel="stylesheet" href="../../../templates/system/css/general.css" type="text/css" />
+	<link rel="stylesheet" href="../../../templates/a4joomla-social-free/css/template.css" type="text/css" />
+</head>
+<body class="contentpane">
+	
+	<script language="javascript" type="text/javascript">
+<!--
+	function submitbutton(pressbutton) {
+	    var form = document.mailtoForm;
+
+		// do field validation
+		if (form.mailto.value == "" || form.from.value == "") {
+			alert( 'Please provide a valid e-mail address.' );
+			return false;
+		}
+		form.submit();
+	}
+-->
+</script>
+
+<form action="https://westwardschool.co.uk/index.php" name="mailtoForm" method="post">
+
+<div style="padding: 10px;">
+	<div style="text-align:right">
+		<a href="javascript: void window.close()">
+			Close Window <img src="../../../components/com_mailto/assets/close-x.png" border="0" alt="" title="" /></a>
+	</div>
+
+	<div class="componentheading">
+		E-mail this link to a friend.	</div>
+
+	<p>
+		E-mail to:
+		<br />
+		<input type="text" name="mailto" class="inputbox" size="25" value=""/>
+	</p>
+
+	<p>
+		Sender:
+		<br />
+		<input type="text" name="sender" class="inputbox" value="" size="25" />
+	</p>
+
+	<p>
+		Your E-mail:
+		<br />
+		<input type="text" name="from" class="inputbox" value="" size="25" />
+	</p>
+
+	<p>
+		Subject:
+		<br />
+		<input type="text" name="subject" class="inputbox" value="" size="25" />
+	</p>
+
+	<p>
+		<button class="button" onclick="return submitbutton('send');">
+			Send		</button>
+		<button class="button" onclick="window.close();return false;">
+			Cancel		</button>
+	</p>
+</div>
+
+	<input type="hidden" name="layout" value="default" />
+	<input type="hidden" name="option" value="com_mailto" />
+	<input type="hidden" name="task" value="send" />
+	<input type="hidden" name="tmpl" value="component" />
+	<input type="hidden" name="link" value="0987d2bf3ce7d6676ffcfdc98422ee6fdd05e0d8" />
+	<input type="hidden" name="bbad84e87b999ac16f26a3ca812f9597" value="1" /></form>
+
+</body>
+</html>

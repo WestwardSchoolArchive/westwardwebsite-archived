@@ -1,0 +1,7 @@
+/* Navigation tweaks */
+
+ul.nav li ul 		{ margin-top: 0px }
+ul.nav, ul.nav li 	{ display: block; }
+ul.nav > li 		{ float: left; }
+ul.nav > li > a 	{ padding: 0 10px; }
+ul.nav li li 		{ float: left; clear: left; }

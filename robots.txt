@@ -1,0 +1,17 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /bin/
+Disallow: /Connections/
+Disallow: /i/
+Disallow: /inc/
+Disallow: /docs/
+Disallow: /*.pdf$
+Disallow: /*.doc$
+Disallow: /*.xls$
+Disallow: /*.docx$
+
+Sitemap: http://westwardschool.greenschoolsonline.co.uk/sitemap.xml
+
+
+Allow: /inc/gallery/
+Allow: /i/photos/Gallery/
